@@ -5,17 +5,43 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
+  <div id="chart_div" style="height: 500px;"></div>
   <div id="app">
-    <ul>
-      <li v-for="fruit in fruits">{{fruit}}</li>
-    </ul>
+    <li v-for="(item, c) in dataArray" v-if="c>0">{{item[0]}}:{{item[1]}}
+      <button v-on:click="addOne(c)">한표</button>
+    </li>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
   <script>
-    var vm = new Vue({
-      el: "#app",
+    var orgdata = [
+      ['종류', '개수'],
+      ['도시락', 3], ['비빔밥', 3], ['김밥', 1],['짬뽕', 1]
+    ];
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+      var data = google.visualization.arrayToDataTable(orgdata);
+      var options = {title: '선호하는 점심', "is3D": true}
+      var chart = new google.visualization.PieChart(
+        document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    new Vue({
+      el: '#app',
       data: {
-        fruits : ['딸기', '오렌지', '사과', '포도']
+        dataArray:orgdata
+      },
+      methods: {
+        addOne: function(val) {
+          console.log(val);
+          var obj = this.dataArray[val];
+          obj[1]++;
+          this.dataArray.splice(val, 1, obj);
+          console.log(this.dataArray);
+          drawBasic();
+        }
       }
     })
   </script>

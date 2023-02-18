@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.my-comp {
+  width: 300px;
+  background-color: #ffffe0;
+  border: solid;
+  border-color: darkorange;
+  border-radius: 8px;
+  padding: 8px;
+}
