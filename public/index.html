@@ -4,16 +4,20 @@
   <title>Express</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
-
 <body>
-  <h1>테스트</h1>
-<<<<<<< HEAD
-  <p>Welcome to Express 테스트</p>
-  <p>Welcome to Express again</p>
-=======
-<h1>Test</h1> 
- <p>Welcome to Express 테스트</p>
->>>>>>> 7a36df0901ef93a137b46caf48186cf0ac09449d
+  <div id="app">
+    <ul>
+      <li v-for="fruit in fruits">{{fruit}}</li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        fruits : ['딸기', '오렌지', '사과', '포도']
+      }
+    })
+  </script>
 </body>
-
 </html>
